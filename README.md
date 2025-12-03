@@ -1,2 +1,2 @@
-# React-Job-App
-Simple React based Job applying application 
+# BackEnd Practice 
+Backend code for practicing using epress.js , mysql and JWT
