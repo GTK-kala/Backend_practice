@@ -1,4 +1,4 @@
-import mysql2 from "mysql2/promise";
+import mysql2 from "mysql2";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -10,7 +10,7 @@ const db = mysql2.createConnection({
 });
 
 db.connect(() => {
-  console.log("Database connected");
+  console.log("Database connected!!!");
 });
 
 export default db;

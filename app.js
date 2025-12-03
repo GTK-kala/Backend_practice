@@ -20,9 +20,9 @@ app.set("view engine", "hbs");
 
 app.use(express.urlencoded({ extended: true }));
 
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "Public")));
 
-app.use(route);
+app.use("/auth", route);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
