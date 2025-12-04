@@ -1,21 +1,36 @@
 import db from "../Config/DataBase.js";
+import bcrypt from "bcryptjs";
 
-export const GetUser = (req, res) => {
+export const LoginUser = (req, res) => {
   const { email, password } = req.body;
-  const sql =
-    "SELECT email , password FROM users WHERE email = ? AND password = ?";
 
-  if (!email || !password) {
-    return res.status(400).json({ message: "Email and password are required" });
-  }
+  const sql = "SELECT * FROM users WHERE email = ?";
 
-  db.query(sql, [email, password], (err, result) => {
+  db.query(sql, [email], (err, result) => {
     if (err) {
       return res.status(500).json({ error: "Database query error" });
     }
-    if (result.length > 0) {
-      return res.status(200).json({ message: "Login successful" });
+
+    if (result.length === 0) {
+      return res.status(400).json({ message: "Invalid email or password" });
     }
-    return res.status(401).json({ message: "Invalid email or password" });
+
+    const user = result[0];
+
+    const isPasswordCorrect = bcrypt.compareSync(password, user.password);
+
+    if (!isPasswordCorrect) {
+      return res.status(400).json({ message: "Invalid email or password" });
+    }
+
+    return res.status(200).json({
+      message: "Login successful",
+      user: {
+        id: user.user_id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+      },
+    });
   });
 };

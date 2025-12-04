@@ -1,7 +1,7 @@
 import db from "../Config/DataBase.js";
 import bcrypt from "bcryptjs";
 
-export const AddUser = (req, res) => {
+export const SignUpUser = (req, res) => {
   const { name, email, password } = req.body;
 
   const sql1 = "SELECT email FROM users WHERE email = ?";
@@ -15,7 +15,6 @@ export const AddUser = (req, res) => {
       return res.status(400).json({ message: "Email already exists" });
     }
 
-    // ✅ Only runs if email does NOT exist
     const hashedPassword = bcrypt.hashSync(password, 8);
     const sql2 = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
 
