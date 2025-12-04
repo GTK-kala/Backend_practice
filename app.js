@@ -27,11 +27,16 @@ app.use("/auth", route);
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
-
+// Home page
 // app.use("/", (req, res) => {
 //   res.render("index");
 // });
 
-app.use("/", (req, res) => {
+// SigUp page
+app.use("/signup", (req, res) => {
   res.render("signup");
+});
+// Login page
+app.use("/login", (req, res) => {
+  res.render("login");
 });
