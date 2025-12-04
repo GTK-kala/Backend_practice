@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Modern SignUp Page</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #4f46e5, #9333ea);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      background: #ffffff;
+      width: 380px;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+      animation: fadeUp 0.5s ease;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 28px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-size: 14px;
+      color: #555;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-top: 6px;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      outline: none;
+      transition: 0.3s;
+    }
+
+    input:focus {
+      border-color: #6d28d9;
+      box-shadow: 0 0 8px rgba(109,40,217,0.3);
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      background: #6d28d9;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      color: #fff;
+      font-size: 16px;
+      margin-top: 10px;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #5b21b6;
+    }
+
+    .footer-text {
+      margin-top: 15px;
+      text-align: center;
+      font-size: 14px;
+      color: #555;
+    }
+
+    .footer-text a {
+      color: #6d28d9;
+      text-decoration: none;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Create Account</h2>
+
+    <form>
+      <div class="input-group">
+        <label>Full Name</label>
+        <input type="text" placeholder="Enter your name" required />
+      </div>
+
+      <div class="input-group">
+        <label>Email</label>
+        <input type="email" placeholder="Enter your email" required />
+      </div>
+
+      <div class="input-group">
+        <label>Password</label>
+        <input type="password" placeholder="Enter your password" required />
+      </div>
+
+      <button type="submit">Sign Up</button>
+    </form>
+
+    <p class="footer-text">Already have an account? <a href="#">Login</a></p>
+  </div>
+</body>
+</html>
