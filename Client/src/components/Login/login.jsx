@@ -7,28 +7,36 @@ import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const navigate = useNavigate();
-  const [values, setValues] = useState({
-    email: "",
-    password: "",
-  });
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const HandleSubmit = async (e) => {
     e.preventDefault();
+    const values = { email, password };
     try {
-      const response = await axios.post(
-        "http://localhost:3001/auth/login",
-        values
-      );
-      if (response.data.success) {
+      const url = "http://localhost:3001/auth/login";
+      const res = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        toast.error(data.message);
+        return;
+      } else {
         toast.success("Login successful!");
         navigate("/dashboard");
-      } else {
-        toast.error(response.data.message);
       }
     } catch (error) {
       toast.error("Login failed. Please try again.");
     }
-    setValues({ email: "", password: "" });
+    setEmail("");
+    setPassword("");
   };
   return (
     <div className="container_login">
@@ -42,7 +50,7 @@ const Login = () => {
             id="email"
             name="email"
             placeholder="Enter your email"
-            onChange={(e) => setValues({ ...values, email: e.target.value })}
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
         </div>
@@ -54,7 +62,7 @@ const Login = () => {
             id="password"
             name="password"
             placeholder="Enter your password"
-            onChange={(e) => setValues({ ...values, password: e.target.value })}
+            onChange={(e) => setPassword(e.target.value)}
             required
           />
         </div>

@@ -4,15 +4,20 @@ import bcrypt from "bcryptjs";
 export const SignUpUser = (req, res) => {
   const { name, email, password } = req.body;
 
-  const sql1 = "SELECT email FROM users WHERE email = ?";
+  const sql1 = "SELECT * FROM users WHERE email = ?";
 
   db.query(sql1, [email], (err, result) => {
     if (err) {
-      console.log("Database query error");
+      return res.status(500).json({
+        message: "Error on Server!!!",
+      });
     }
 
     if (result.length > 0) {
-      console.log("Email already exists");
+      return res.status(400).json({
+        message: "Email already exists!!!",
+        result: result,
+      });
     }
 
     const hashedPassword = bcrypt.hashSync(password, 8);
@@ -20,9 +25,14 @@ export const SignUpUser = (req, res) => {
 
     db.query(sql2, [name, email, hashedPassword], (err) => {
       if (err) {
-        console.log("Database insert error");
+        return res.status(500).json({
+          message: "Error on Server!!!",
+        });
       } else {
-        console.log("User registered successfully");
+        return res.status(200).json({
+          message: "User registered successfully",
+          result: [],
+        });
       }
     });
   });

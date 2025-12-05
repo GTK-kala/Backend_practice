@@ -1,5 +1,4 @@
 import "./Signup.css";
-import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
@@ -7,27 +6,42 @@ import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const navigate = useNavigate();
-  const [values, setValues] = useState({
-    name: "",
-    email: "",
-    password: "",
-  });
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const HandleSubmit = async (e) => {
     e.preventDefault();
+    const values = { name, email, password };
+
     try {
-      const res = await axios.post("http://localhost:3001/auth/signup", values);
-      if (res.data.success) {
-        toast.success("Signup successful!");
-        navigate("/login");
+      const url = "http://localhost:3001/auth/signup";
+      const res = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        toast.error(data.message);
+        return;
       } else {
-        toast.error(res.data.message);
+        toast.success("Signup successful!");
+        navigate("/dashboard");
       }
     } catch (error) {
       toast.error("Signup failed. Please try again.");
     }
-    setValues({ name: "", email: "", password: "" });
+
+    setName("");
+    setEmail("");
+    setPassword("");
   };
+
   return (
     <div className="container_signup">
       <h2>Create Account</h2>
@@ -40,7 +54,7 @@ const Signup = () => {
             id="name"
             name="name"
             placeholder="Enter your name"
-            onChange={(e) => setValues({ ...values, name: e.target.value })}
+            onChange={(e) => setName(e.target.value)}
             required
           />
         </div>
@@ -52,7 +66,7 @@ const Signup = () => {
             id="email"
             name="email"
             placeholder="Enter your email"
-            onChange={(e) => setValues({ ...values, email: e.target.value })}
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
         </div>
@@ -64,7 +78,7 @@ const Signup = () => {
             id="password"
             name="password"
             placeholder="Enter your password"
-            onChange={(e) => setValues({ ...values, password: e.target.value })}
+            onChange={(e) => setPassword(e.target.value)}
             required
           />
         </div>
