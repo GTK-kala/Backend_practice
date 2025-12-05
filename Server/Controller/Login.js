@@ -8,11 +8,11 @@ export const LoginUser = (req, res) => {
 
   db.query(sql, [email], (err, result) => {
     if (err) {
-      return res.status(500).json({ error: "Database query error" });
+      console.log("Database query error");
     }
 
     if (result.length === 0) {
-      return res.status(400).json({ message: "Invalid email or password" });
+      console.log("Invalid email or password");
     }
 
     const user = result[0];
@@ -20,9 +20,9 @@ export const LoginUser = (req, res) => {
     const isPasswordCorrect = bcrypt.compareSync(password, user.password);
 
     if (!isPasswordCorrect) {
-      return res.status(400).json({ message: "Invalid email or password" });
+      console.log("Invalid email or password");
+    } else {
+      console.log("Login successfully!!!");
     }
-
-    console.log("Login successfully!!!");
   });
 };

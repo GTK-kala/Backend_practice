@@ -1,4 +1,5 @@
 import "./login.css";
+import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
@@ -13,25 +14,6 @@ const Login = () => {
 
   const HandleSubmit = (e) => {
     e.preventDefault();
-    try {
-      const url = "http://localhost:3001/auth/login";
-      fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      });
-      if (error) {
-        toast.error("Login failed. Please try again.");
-      } else {
-        toast.success("Login successful!");
-        navigate("/");
-      }
-    } catch (error) {
-      toast.error("Login failed. Please try again.");
-    }
-    setValues({ email: "", password: "" });
   };
   return (
     <div className="container">

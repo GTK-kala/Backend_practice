@@ -8,11 +8,11 @@ export const SignUpUser = (req, res) => {
 
   db.query(sql1, [email], (err, result) => {
     if (err) {
-      return res.status(500).json({ error: "Database query error" });
+      console.log("Database query error");
     }
 
     if (result.length > 0) {
-      return res.status(400).json({ message: "Email already exists" });
+      console.log("Email already exists");
     }
 
     const hashedPassword = bcrypt.hashSync(password, 8);
@@ -20,10 +20,10 @@ export const SignUpUser = (req, res) => {
 
     db.query(sql2, [name, email, hashedPassword], (err) => {
       if (err) {
-        return res.status(500).json({ error: "Database insert error" });
+        console.log("Database insert error");
+      } else {
+        console.log("User registered successfully");
       }
-
-      console.log("SignUp successfully!!!");
     });
   });
 };
