@@ -1,8 +1,9 @@
-import route from "./Routes/routes.js";
-import { fileURLToPath } from "url";
-import express from "express";
-import dotenv from "dotenv";
 import path from "path";
+import dotenv from "dotenv";
+import express from "express";
+import cors from "cors";
+import { fileURLToPath } from "url";
+import route from "./Routes/routes.js";
 
 // Configure __dirname for ES modules
 const __filename = fileURLToPath(import.meta.url);
@@ -11,6 +12,7 @@ const __dirname = path.dirname(__filename);
 dotenv.config({ path: path.join(__dirname, ".env") });
 
 const app = express();
+app.use(cors());
 
 const PORT = process.env.PORT || 3001;
 

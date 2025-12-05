@@ -23,6 +23,6 @@ export const LoginUser = (req, res) => {
       return res.status(400).json({ message: "Invalid email or password" });
     }
 
-    res.render("signup", { message: "Login successful", user });
+    console.log("Login successfully!!!");
   });
 };

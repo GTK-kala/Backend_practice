@@ -23,9 +23,7 @@ export const SignUpUser = (req, res) => {
         return res.status(500).json({ error: "Database insert error" });
       }
 
-      return res.status(200).json({
-        message: "User registered successfully",
-      });
+      console.log("SignUp successfully!!!");
     });
   });
 };
