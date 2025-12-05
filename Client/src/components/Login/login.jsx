@@ -1,5 +1,4 @@
 import "./login.css";
-import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
@@ -24,13 +23,16 @@ const Login = () => {
       });
 
       const data = await res.json();
+      const Data = data.result;
 
       if (!res.ok) {
         toast.error(data.message);
         return;
       } else {
+        console.log(Data);
+        localStorage.setItem("user_id", Data.users_id);
         toast.success("Login successful!");
-        navigate("/dashboard");
+        navigate(`/dashboard`);
       }
     } catch (error) {
       toast.error("Login failed. Please try again.");

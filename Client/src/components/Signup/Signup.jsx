@@ -25,13 +25,16 @@ const Signup = () => {
       });
 
       const data = await res.json();
+      const Data = data.result;
 
       if (!res.ok) {
         toast.error(data.message);
         return;
       } else {
+        console.log(Data);
+        localStorage.setItem("users_id", Data.insertId);
         toast.success("Signup successful!");
-        navigate("/dashboard");
+        navigate(`/dashboard`);
       }
     } catch (error) {
       toast.error("Signup failed. Please try again.");

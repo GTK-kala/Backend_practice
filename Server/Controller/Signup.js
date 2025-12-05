@@ -23,7 +23,7 @@ export const SignUpUser = (req, res) => {
     const hashedPassword = bcrypt.hashSync(password, 8);
     const sql2 = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
 
-    db.query(sql2, [name, email, hashedPassword], (err) => {
+    db.query(sql2, [name, email, hashedPassword], (err, result) => {
       if (err) {
         return res.status(500).json({
           message: "Error on Server!!!",
@@ -31,7 +31,7 @@ export const SignUpUser = (req, res) => {
       } else {
         return res.status(200).json({
           message: "User registered successfully",
-          result: [],
+          result: result,
         });
       }
     });

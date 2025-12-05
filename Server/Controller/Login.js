@@ -30,7 +30,7 @@ export const LoginUser = (req, res) => {
     } else {
       return res.status(200).json({
         message: "Login successfully!!!",
-        result: [],
+        result: user,
       });
     }
   });
