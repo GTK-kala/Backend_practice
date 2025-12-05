@@ -1,2 +1,2 @@
 # BackEnd Practice 
-Backend code for practicing using epress.js , mysql and JWT
+Backend code and frontend code for practicing using react.js , epress.js , mysql and JWT
