@@ -12,11 +12,26 @@ const Login = () => {
     password: "",
   });
 
-  const HandleSubmit = (e) => {
+  const HandleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      const response = await axios.post(
+        "http://localhost:3001/auth/login",
+        values
+      );
+      if (response.data.success) {
+        toast.success("Login successful!");
+        navigate("/dashboard");
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      toast.error("Login failed. Please try again.");
+    }
+    setValues({ email: "", password: "" });
   };
   return (
-    <div className="container">
+    <div className="container_login">
       <h2>Login</h2>
 
       <form onSubmit={(e) => HandleSubmit(e)}>

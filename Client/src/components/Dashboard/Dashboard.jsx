@@ -2,7 +2,7 @@ import "./Dashboard.css";
 
 const Dashboard = () => {
   return (
-    <>
+    <div className="dashboard-container">
       <div className="sidebar">
         <h2>Dashboard</h2>
         <div className="nav-item">Home</div>
@@ -21,7 +21,7 @@ const Dashboard = () => {
           </p>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

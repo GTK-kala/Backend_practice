@@ -3,6 +3,7 @@ import { Toaster } from "react-hot-toast";
 import Login from "./components/Login/Login";
 import Signup from "./components/Signup/Signup";
 import { Route, Routes } from "react-router-dom";
+import Dashboard from "./components/Dashboard/Dashboard";
 
 const App = () => {
   return (
@@ -11,6 +12,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
       <Toaster
         position="top-center"

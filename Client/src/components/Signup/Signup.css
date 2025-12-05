@@ -1,10 +1,4 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
-}
-body {
+.container_signup body {
   background: linear-gradient(135deg, #f0f3f5, #e7e8e9);
   background-size: 400% 400%;
   animation: gradientShift 10s ease infinite;
@@ -13,7 +7,7 @@ body {
   justify-content: center;
   align-items: center;
 }
-.container {
+.container_signup {
   background: #ffffff;
   width: 380px;
   padding: 30px;
@@ -31,21 +25,21 @@ body {
     transform: translateY(0);
   }
 }
-h2 {
+.container_signup h2 {
   text-align: center;
   margin-bottom: 20px;
   font-size: 28px;
   font-weight: 600;
   color: #333;
 }
-.input-group {
+.container_signup .input-group {
   margin-bottom: 20px;
 }
-label {
+.container_signup label {
   font-size: 14px;
   color: #555;
 }
-input {
+.container_signup input {
   width: 100%;
   padding: 12px;
   margin-top: 6px;
@@ -54,11 +48,11 @@ input {
   outline: none;
   transition: 0.3s;
 }
-input:focus {
+.container_signup input:focus {
   border-color: #6d28d9;
   box-shadow: 0 0 8px rgba(109, 40, 217, 0.3);
 }
-button {
+.container_signup button {
   width: 100%;
   padding: 14px;
   background: #6d28d9;
@@ -71,16 +65,16 @@ button {
   font-weight: 600;
   transition: 0.3s;
 }
-button:hover {
+.container_signup button:hover {
   background: #5b21b6;
 }
-.footer-text {
+.container_signup .footer-text {
   margin-top: 15px;
   text-align: center;
   font-size: 14px;
   color: #555;
 }
-.footer-text a {
+.container_signup .footer-text a {
   color: #6d28d9;
   text-decoration: none;
   font-weight: 600;

@@ -13,11 +13,23 @@ const Signup = () => {
     password: "",
   });
 
-  const HandleSubmit = (e) => {
+  const HandleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      const res = await axios.post("http://localhost:3001/auth/signup", values);
+      if (res.data.success) {
+        toast.success("Signup successful!");
+        navigate("/login");
+      } else {
+        toast.error(res.data.message);
+      }
+    } catch (error) {
+      toast.error("Signup failed. Please try again.");
+    }
+    setValues({ name: "", email: "", password: "" });
   };
   return (
-    <div className="container">
+    <div className="container_signup">
       <h2>Create Account</h2>
 
       <form onSubmit={(e) => HandleSubmit(e)}>
