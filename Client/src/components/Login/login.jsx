@@ -20,6 +20,7 @@ const Login = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(values),
+        credentials: "include",
       });
 
       const data = await res.json();
@@ -30,7 +31,7 @@ const Login = () => {
         return;
       } else {
         console.log(Data);
-        localStorage.setItem("user_id", Data.users_id);
+        localStorage.setItem("user_id", Data.user_id);
         toast.success("Login successful!");
         navigate(`/dashboard`);
       }
