@@ -1,41 +1,14 @@
 import "./Dashboard.css";
-import toast from "react-hot-toast";
-import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const [id, setId] = useState(null);
-  const HandleLogOut = async (e) => {
-    e.preventDefault();
-    try {
-      const url = `http://localhost:3001/auth/logout/${id}`;
-      const res = await fetch(url, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ users_id: id }),
-      });
 
-      const data = await res.json();
-
-      if (!res.ok) {
-        toast.error("Logout failed");
-      } else {
-        toast.success(data.message);
-        localStorage.removeItem("users_id");
-        cookieStore.delete("token");
-        navigate("/");
-      }
-    } catch (error) {
-      toast.error("Logout failed", error);
-    }
+  const HandleLogOut = async () => {
+    localStorage.removeItem("auth_token");
+    navigate("/login");
   };
-  useEffect(() => {
-    const users_id = localStorage.getItem("users_id");
-    setId(users_id);
-  }, []);
+
   return (
     <div className="dashboard-container">
       <div className="sidebar">

@@ -8,39 +8,50 @@ const Home = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    try {
-      const id = localStorage.getItem("users_id");
-      const url = `http://localhost:3001/auth/verify/${id}`;
-      // const token = cookieStore.get("token").value;
-      const verifyUser = async () => {
-        const res = await fetch(url, {
+    const token = localStorage.getItem("auth_token");
+
+    if (!token) {
+      setIsLoggedIn(false);
+      return;
+    }
+
+    const verifyUser = async () => {
+      try {
+        const res = await fetch("http://localhost:3001/verify/user", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            // Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
           },
         });
 
-        const data = await res.json();
-        const Data = data.user;
-
         if (!res.ok) {
           setIsLoggedIn(false);
-        } else {
-          setIsLoggedIn(true);
-          setMessage(Data.message);
-          setName(Data.name);
+          return;
         }
-      };
-      verifyUser();
-    } catch (error) {
-      console.error("Error verifying user:", error);
-    }
+
+        const data = await res.json();
+        setIsLoggedIn(true);
+        setName(data.user.name);
+        setMessage(data.user.message || "");
+      } catch (error) {
+        console.error("Error verifying user:", error);
+        setIsLoggedIn(false);
+      }
+    };
+
+    verifyUser();
   }, []);
+
+  const logout = () => {
+    localStorage.removeItem("auth_token");
+    setIsLoggedIn(false);
+  };
+
   return (
     <div className="home-container">
       {isLoggedIn ? (
-        <div className="welcome-loggedin">
+        <div className="welcome-logged-in">
           <h1>Welcome Back, {name}!</h1>
           <p>You are successfully logged in.</p>
           <p>{message}</p>
@@ -48,19 +59,13 @@ const Home = () => {
             <Link to="/dashboard" className="btn">
               Go to Dashboard
             </Link>
-            <button
-              className="btn"
-              onClick={() => {
-                localStorage.removeItem("users_id");
-                setIsLoggedIn(false);
-              }}
-            >
+            <button className="btn" onClick={logout}>
               Logout
             </button>
           </div>
         </div>
       ) : (
-        <div className="welcome-loggedout">
+        <div className="welcome-logged-out">
           <h1>Welcome</h1>
           <p>Select an option to continue.</p>
           <div className="btn-group">
