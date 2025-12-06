@@ -4,22 +4,21 @@ import { useState, useEffect } from "react";
 
 const Home = () => {
   const [name, setName] = useState("");
-  const [message, setMessage] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    const token = cookieStore.get("auth_token")?.value;
+    const token = localStorage.getItem("auth_token");
 
     if (!token) {
       setIsLoggedIn(false);
       return;
     }
+
     const verifyUser = async () => {
       try {
         const res = await fetch("http://localhost:3001/verify/user", {
           method: "GET",
           headers: {
-            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
         });
@@ -27,14 +26,11 @@ const Home = () => {
         if (!res.ok) {
           setIsLoggedIn(false);
           return;
-        } else {
-          const data = await res.json();
-          const Data = data.user;
-          console.log(Data);
-          setIsLoggedIn(true);
-          setName(Data.name);
-          setMessage(Data.message || "");
         }
+
+        const data = await res.json();
+        setIsLoggedIn(true);
+        setName(data.user.name);
       } catch (error) {
         console.error("Error verifying user:", error);
         setIsLoggedIn(false);
@@ -55,7 +51,7 @@ const Home = () => {
         <div className="welcome-logged-in">
           <h1>Welcome Back, {name}!</h1>
           <p>You are successfully logged in.</p>
-          <p>{message}</p>
+
           <div className="btn-group">
             <Link to="/dashboard" className="btn">
               Go to Dashboard

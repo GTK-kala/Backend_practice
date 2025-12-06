@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
-import db from "../Config/DataBase.js";
+import db from "../Config/database.js";
 
 export const LoginUser = (req, res) => {
   const { email, password } = req.body;
@@ -10,7 +10,7 @@ export const LoginUser = (req, res) => {
   db.query(sql, [email], (err, result) => {
     if (err) {
       return res.status(500).json({
-        message: "Error on Server!!!",
+        message: "Server error",
       });
     }
 
@@ -28,21 +28,22 @@ export const LoginUser = (req, res) => {
       return res.status(400).json({
         message: "Invalid email or password",
       });
-    } else {
-      const token = jwt.sign({ id: user.users_id }, process.env.Key, {
-        expiresIn: "1h",
-      });
-      res.cookie("token", token, {
-        httpOnly: true,
-        secure: false,
-        sameSite: "lax",
-        path: "/",
-      });
-
-      return res.status(200).json({
-        message: "Login successfully!!!",
-        result: user,
-      });
     }
+
+    const token = jwt.sign(
+      {
+        id: user.users_id, // matches verifyUser
+        role: user.role, // optional but recommended
+        email: user.email,
+      },
+      process.env.JWT_SECRET, // MUST match verifyUser
+      { expiresIn: process.env.TOKEN_EXPIRY || "1h" } // optional
+    );
+
+    return res.status(200).json({
+      message: "Login successful",
+      user: user, // send user object
+      token: token, // send JWT
+    });
   });
 };

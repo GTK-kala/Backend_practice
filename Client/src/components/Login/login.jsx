@@ -24,13 +24,12 @@ const Login = () => {
       });
 
       const data = await res.json();
-      const Data = data.result;
 
       if (!res.ok) {
         toast.error(data.message);
         return;
       } else {
-        localStorage.setItem("users_id", Data.users_id);
+        localStorage.setItem("auth_token", data.token);
         toast.success("Login successful!");
         navigate(`/`);
       }
