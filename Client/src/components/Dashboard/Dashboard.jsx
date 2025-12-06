@@ -1,8 +1,10 @@
 import "./Dashboard.css";
 import toast from "react-hot-toast";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
+  const navigate = useNavigate();
   const [id, setId] = useState(null);
   const HandleLogOut = async (e) => {
     e.preventDefault();
@@ -15,13 +17,16 @@ const Dashboard = () => {
         },
         body: JSON.stringify({ users_id: id }),
       });
+
       const data = await res.json();
+
       if (!res.ok) {
         toast.error("Logout failed");
       } else {
         toast.success(data.message);
         localStorage.removeItem("users_id");
-        window.location.href = "/signup";
+        cookieStore.delete("token");
+        navigate("/");
       }
     } catch (error) {
       toast.error("Logout failed", error);
@@ -35,7 +40,9 @@ const Dashboard = () => {
     <div className="dashboard-container">
       <div className="sidebar">
         <h2>Dashboard</h2>
-        <div className="nav-item">Home</div>
+        <div className="nav-item" onClick={() => navigate("/")}>
+          Home
+        </div>
         <div className="nav-item">Profile</div>
         <div className="nav-item">Settings</div>
         <div className="nav-item">Messages</div>

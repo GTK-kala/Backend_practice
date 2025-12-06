@@ -30,8 +30,7 @@ const Login = () => {
         toast.error(data.message);
         return;
       } else {
-        console.log(Data);
-        localStorage.setItem("user_id", Data.user_id);
+        localStorage.setItem("users_id", Data.users_id);
         toast.success("Login successful!");
         navigate(`/dashboard`);
       }

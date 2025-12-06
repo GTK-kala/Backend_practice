@@ -31,7 +31,6 @@ const Signup = () => {
         toast.error(data.message);
         return;
       } else {
-        console.log(Data);
         localStorage.setItem("users_id", Data.insertId);
         toast.success("Signup successful!");
         navigate(`/dashboard`);
