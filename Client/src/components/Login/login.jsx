@@ -32,7 +32,7 @@ const Login = () => {
       } else {
         localStorage.setItem("users_id", Data.users_id);
         toast.success("Login successful!");
-        navigate(`/dashboard`);
+        navigate(`/`);
       }
     } catch (error) {
       toast.error("Login failed. Please try again.");

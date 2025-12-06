@@ -8,13 +8,12 @@ const Home = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    const token = localStorage.getItem("auth_token");
+    const token = cookieStore.get("auth_token")?.value;
 
     if (!token) {
       setIsLoggedIn(false);
       return;
     }
-
     const verifyUser = async () => {
       try {
         const res = await fetch("http://localhost:3001/verify/user", {
@@ -28,12 +27,14 @@ const Home = () => {
         if (!res.ok) {
           setIsLoggedIn(false);
           return;
+        } else {
+          const data = await res.json();
+          const Data = data.user;
+          console.log(Data);
+          setIsLoggedIn(true);
+          setName(Data.name);
+          setMessage(Data.message || "");
         }
-
-        const data = await res.json();
-        setIsLoggedIn(true);
-        setName(data.user.name);
-        setMessage(data.user.message || "");
       } catch (error) {
         console.error("Error verifying user:", error);
         setIsLoggedIn(false);
