@@ -7,9 +7,9 @@ import { verifyUser } from "../Controller/VerifyUser.js";
 
 const route = express.Router();
 
-route.get("/verify", verifyUser);
 route.post("/login", LoginUser);
 route.post("/signup", SignUpUser);
+route.get("/verify/:users_id", verifyUser);
 route.delete("/logout/:users_id", LogoutUser);
 
 export default route;
