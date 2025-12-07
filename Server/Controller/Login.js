@@ -1,5 +1,5 @@
-import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 import db from "../Config/database.js";
 
 export const LoginUser = (req, res) => {

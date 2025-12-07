@@ -10,7 +10,7 @@ const route = express.Router();
 
 route.post("/login", LoginUser);
 route.post("/signup", SignUpUser);
-route.get("/verify/user", verifyToken, verifyUser);
 route.delete("/logout/:users_id", LogoutUser);
+route.get("/verify", verifyToken, verifyUser);
 
 export default route;

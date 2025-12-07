@@ -1,7 +1,7 @@
+import cors from "cors";
 import path from "path";
 import dotenv from "dotenv";
 import express from "express";
-import cors from "cors";
 import { fileURLToPath } from "url";
 import route from "./Routes/routes.js";
 import cookieParser from "cookie-parser";
