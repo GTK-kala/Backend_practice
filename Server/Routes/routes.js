@@ -4,13 +4,13 @@ import { LoginUser } from "../Controller/Login.js";
 import { SignUpUser } from "../Controller/Signup.js";
 import { LogoutUser } from "../Controller/Logout.js";
 import { verifyUser } from "../Controller/VerifyUser.js";
-import { VerifyToken } from "../Users/verifyToken .js";
+import { verifyToken } from "../Controller/VerifyUser.js";
 
 const route = express.Router();
 
 route.post("/login", LoginUser);
 route.post("/signup", SignUpUser);
-route.get("/verify/user", VerifyToken, verifyUser);
+route.get("/verify/user", verifyToken, verifyUser);
 route.delete("/logout/:users_id", LogoutUser);
 
 export default route;

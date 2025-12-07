@@ -37,7 +37,7 @@ export const LoginUser = (req, res) => {
         email: user.email,
       },
       process.env.JWT_SECRET, // MUST match verifyUser
-      { expiresIn: process.env.TOKEN_EXPIRY || "1h" } // optional
+      { expiresIn: process.env.JWT_Expire || "1d" } // optional
     );
 
     return res.status(200).json({

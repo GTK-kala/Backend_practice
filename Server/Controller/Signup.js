@@ -1,4 +1,4 @@
-import db from "../Config/DataBase.js";
+import db from "../Config/database.js";
 import bcrypt from "bcryptjs";
 
 export const SignUpUser = (req, res) => {
