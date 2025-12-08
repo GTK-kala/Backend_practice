@@ -29,7 +29,6 @@ const Login = () => {
         toast.error(data.message);
         return;
       } else {
-        localStorage.setItem("auth_token", data.token);
         toast.success("Login successful!");
         navigate(`/`);
       }

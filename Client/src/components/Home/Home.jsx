@@ -9,15 +9,11 @@ const Home = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    const token = localStorage.getItem("auth_token");
-
     const verifyUser = async () => {
       try {
         const res = await fetch("http://localhost:3001/auth/verify", {
           method: "GET",
-          headers: {
-            Authorization: `${token}`, // SEND TOKEN
-          },
+          credentials: "include",
         });
 
         if (!res.ok) {

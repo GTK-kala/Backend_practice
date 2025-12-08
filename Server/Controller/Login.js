@@ -32,24 +32,21 @@ export const LoginUser = (req, res) => {
 
     const token = jwt.sign(
       {
-        id: user.users_id, // matches verifyUser
-        role: user.role, // optional but recommended
+        id: user.users_id,
+        role: user.role,
         email: user.email,
       },
-      process.env.JWT_SECRET, // MUST match verifyUser
-      { expiresIn: process.env.JWT_Expire || "1d" } // optional
+      process.env.JWT_SECRET,
+      { expiresIn: process.env.JWT_Expire || "1d" }
     );
 
-    // const cookieOptions = {
-    //   httpOnly: true,
-    //   secure: process.env.NODE_ENV === "production", // use secure cookies in production
-    //   sameSite: "Lax", // adjust as needed
-    //   maxAge: 24 * 60 * 60 * 1000, // 1 day
-    // };
-    return res.status(200).json({
+    const cookieOptions = {
+      httpOnly: true,
+      secure: false,
+      sameSite: "Lax",
+    };
+    res.status(200).cookie("token", token, cookieOptions).json({
       message: "Login successful",
-      user: user, // send user object
-      token: token, // send JWT
     });
   });
 };
