@@ -5,8 +5,8 @@ const Dashboard = () => {
   const navigate = useNavigate();
 
   const HandleLogOut = async () => {
-    localStorage.removeItem("users_id");
-    localStorage.removeItem("auth_token");
+    // localStorage.removeItem("users_id");
+    // localStorage.removeItem("auth_token");
     navigate("/login");
   };
 

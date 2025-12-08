@@ -45,8 +45,16 @@ export const LoginUser = (req, res) => {
       secure: false,
       sameSite: "Lax",
     };
-    res.status(200).cookie("token", token, cookieOptions).json({
-      message: "Login successful",
-    });
+
+    return res
+      .status(200)
+      .cookie("token", token, cookieOptions)
+      .json({
+        message: "Login successful",
+        user: {
+          users_id: user.users_id,
+          name: user.name,
+        },
+      });
   });
 };
