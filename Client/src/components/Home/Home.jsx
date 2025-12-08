@@ -7,21 +7,11 @@ const Home = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    const token = localStorage.getItem("auth_token");
-
-    if (!token) {
-      setIsLoggedIn(false);
-      return;
-    }
-
     const verifyUser = async () => {
       try {
-        const url = "http://localhost:3001/auth/verify/user";
-        const res = await fetch(url, {
+        const res = await fetch("http://localhost:3001/auth/verify", {
           method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+          credentials: "include", // SEND COOKIE
         });
 
         if (!res.ok) {
@@ -41,8 +31,16 @@ const Home = () => {
     verifyUser();
   }, []);
 
-  const logout = () => {
-    localStorage.removeItem("auth_token");
+  const logout = async () => {
+    try {
+      await fetch("http://localhost:3001/auth/logout", {
+        method: "POST",
+        credentials: "include",
+      });
+    } catch (error) {
+      console.error("Logout error:", error);
+    }
+
     setIsLoggedIn(false);
   };
 

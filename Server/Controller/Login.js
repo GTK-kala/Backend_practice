@@ -21,6 +21,7 @@ export const LoginUser = (req, res) => {
     }
 
     const user = result[0];
+    console.log(user);
 
     const isPasswordCorrect = bcrypt.compareSync(password, user.password);
 
