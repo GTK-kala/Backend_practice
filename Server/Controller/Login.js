@@ -21,7 +21,6 @@ export const LoginUser = (req, res) => {
     }
 
     const user = result[0];
-    console.log(user);
 
     const isPasswordCorrect = bcrypt.compareSync(password, user.password);
 
@@ -41,6 +40,12 @@ export const LoginUser = (req, res) => {
       { expiresIn: process.env.JWT_Expire || "1d" } // optional
     );
 
+    // const cookieOptions = {
+    //   httpOnly: true,
+    //   secure: process.env.NODE_ENV === "production", // use secure cookies in production
+    //   sameSite: "Lax", // adjust as needed
+    //   maxAge: 24 * 60 * 60 * 1000, // 1 day
+    // };
     return res.status(200).json({
       message: "Login successful",
       user: user, // send user object

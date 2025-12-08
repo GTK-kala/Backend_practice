@@ -1,17 +1,23 @@
 import "./Home.css";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigator = useNavigate();
   const [name, setName] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
+    const token = localStorage.getItem("auth_token");
+
     const verifyUser = async () => {
       try {
         const res = await fetch("http://localhost:3001/auth/verify", {
           method: "GET",
-          credentials: "include", // SEND COOKIE
+          headers: {
+            Authorization: `${token}`, // SEND TOKEN
+          },
         });
 
         if (!res.ok) {
@@ -32,16 +38,10 @@ const Home = () => {
   }, []);
 
   const logout = async () => {
-    try {
-      await fetch("http://localhost:3001/auth/logout", {
-        method: "POST",
-        credentials: "include",
-      });
-    } catch (error) {
-      console.error("Logout error:", error);
-    }
-
+    localStorage.removeItem("auth_token");
+    localStorage.removeItem("users_id");
     setIsLoggedIn(false);
+    navigator("/login");
   };
 
   return (
@@ -55,7 +55,7 @@ const Home = () => {
             <Link to="/dashboard" className="btn">
               Go to Dashboard
             </Link>
-            <button className="btn" onClick={logout}>
+            <button className="btn" onClick={() => logout()}>
               Logout
             </button>
           </div>
