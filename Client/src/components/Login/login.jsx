@@ -20,7 +20,7 @@ const Login = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(values),
-        credentials: "include",
+        // credentials: "include",
       });
 
       const data = await res.json();
@@ -29,8 +29,8 @@ const Login = () => {
         toast.error(data.message);
         return;
       } else {
-        // localStorage.setItem("auth_token", data.token);
-        // localStorage.setItem("users_id", data.user.users_id);
+        localStorage.setItem("auth_token", data.token);
+        localStorage.setItem("users_id", data.user.users_id);
         toast.success("Login successful!");
         navigate(`/`);
       }

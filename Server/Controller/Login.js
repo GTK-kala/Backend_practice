@@ -40,7 +40,7 @@ export const LoginUser = (req, res) => {
       { expiresIn: process.env.JWT_Expire || "1d" }
     );
 
-    const cookieOptions = {
+    const cookie = {
       httpOnly: true,
       secure: false,
       sameSite: "Lax",
@@ -48,9 +48,10 @@ export const LoginUser = (req, res) => {
 
     return res
       .status(200)
-      .cookie("token", token, cookieOptions)
+      .cookie("token", token, cookie)
       .json({
         message: "Login successful",
+        token: token,
         user: {
           users_id: user.users_id,
           name: user.name,

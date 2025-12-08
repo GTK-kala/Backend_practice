@@ -9,18 +9,21 @@ const Home = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    // const token = localStorage.getItem("auth_token");
+    const token = localStorage.getItem("auth_token");
 
-    // if (!token) {
-    //   setIsLoggedIn(false);
-    //   return;
-    // }
+    if (!token) {
+      setIsLoggedIn(false);
+      return;
+    }
 
     const verifyUser = async () => {
       try {
         const res = await fetch("http://localhost:3001/auth/verify", {
           method: "GET",
-          credentials: "include",
+          headers: {
+            authorization: `${token}`,
+          },
+          // credentials: "include",
         });
 
         if (!res.ok) {
@@ -41,8 +44,8 @@ const Home = () => {
   }, []);
 
   const logout = async () => {
-    // localStorage.removeItem("auth_token");
-    // localStorage.removeItem("users_id");
+    localStorage.removeItem("auth_token");
+    localStorage.removeItem("users_id");
     setIsLoggedIn(false);
     navigator("/login");
   };

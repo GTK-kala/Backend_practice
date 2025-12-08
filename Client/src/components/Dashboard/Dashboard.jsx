@@ -1,12 +1,15 @@
 import "./Dashboard.css";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { ContextApi } from "../../Context/ContextProvide";
 
 const Dashboard = () => {
   const navigate = useNavigate();
+  const { name, role } = useContext(ContextApi);
 
   const HandleLogOut = async () => {
-    // localStorage.removeItem("users_id");
-    // localStorage.removeItem("auth_token");
+    localStorage.removeItem("users_id");
+    localStorage.removeItem("auth_token");
     navigate("/login");
   };
 
@@ -27,7 +30,8 @@ const Dashboard = () => {
 
       <div className="main-content">
         <div className="welcome-box">
-          <h1>Welcome Back!</h1>
+          <h1>Welcome Back, {name}!</h1>
+          <h3>Your role is {role}</h3>
           <p>
             You are successfully logged in. Explore your dashboard using the
             menu on the left.
