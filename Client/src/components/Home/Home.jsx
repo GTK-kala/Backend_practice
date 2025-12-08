@@ -58,7 +58,7 @@ const Home = () => {
           <p>You are successfully logged in.</p>
 
           <div className="btn-group">
-            <Link to="/dashboard" className="btn">
+            <Link to="/dashboard" className="btn" onClick={() => FetchData()}>
               Go to Dashboard
             </Link>
             <button className="btn" onClick={() => logout()}>

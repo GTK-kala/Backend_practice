@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export const ContextApi = createContext(null);
 
@@ -18,26 +18,41 @@ const ContextProvide = (props) => {
     setName,
     setIsLoggedIn,
   };
-
   useEffect(() => {
-    const token = localStorage.getItem("auth_token");
-    try {
-      const url = "http://localhost:3001/auth/verify";
-      const res = fetch(url, {
-        method: "GET",
-        headers: {
-          authorization: `${token}`,
-        },
-        // credentials : "include"
-      });
-      const data = res.json();
-      const user = data.user;
-      setId(user.users_id);
-      setName(user.name);
-      setIsLoggedIn(true);
-    } catch (error) {
-      console.log(error);
-    }
+    const FetchData = async () => {
+      const token = localStorage.getItem("auth_token");
+
+      try {
+        const url = "http://localhost:3001/auth/verify";
+
+        const response = await fetch(url, {
+          method: "GET",
+          headers: {
+            Authorization: `${token}`,
+          },
+          // credentials: "include",
+        });
+
+        if (!response.ok) {
+          console.log("Failed to verify user");
+          setIsLoggedIn(false);
+          return;
+        }
+
+        const data = await response.json();
+
+        const user = data.user;
+
+        setId(user.id);
+        setName(user.name);
+        setRole(user.role);
+        setIsLoggedIn(true);
+      } catch (error) {
+        console.log("Verify Error:", error);
+        setIsLoggedIn(false);
+      }
+    };
+    FetchData();
   }, [isLoggedIn]);
   return (
     <ContextApi.Provider value={ContextValue}>

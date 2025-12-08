@@ -53,8 +53,9 @@ export const LoginUser = (req, res) => {
         message: "Login successful",
         token: token,
         user: {
-          users_id: user.users_id,
+          id: user.users_id,
           name: user.name,
+          role: user.role,
         },
       });
   });

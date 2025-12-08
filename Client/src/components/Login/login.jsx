@@ -30,7 +30,7 @@ const Login = () => {
         return;
       } else {
         localStorage.setItem("auth_token", data.token);
-        localStorage.setItem("users_id", data.user.users_id);
+        localStorage.setItem("users_id", data.user.id);
         toast.success("Login successful!");
         navigate(`/`);
       }
