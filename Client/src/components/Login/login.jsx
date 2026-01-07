@@ -1,7 +1,7 @@
 import "./login.css";
 import { useState } from "react";
-import { motion } from "framer-motion";
 import toast from "react-hot-toast";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
@@ -47,7 +47,7 @@ const Login = () => {
       initial={{ opacity: 0, x: "-100vw" }}
       animate={{ opacity: 1, x: 0 }}
       exit={{ x: "100vw", transition: { ease: "easeInOut" } }}
-      transition={{ type: "spring", stiffness: 120, delay: 1, duration: 1.5 }}
+      transition={{ type: "spring", stiffness: 120, delay: 0.5 }}
     >
       <h2>Login</h2>
 

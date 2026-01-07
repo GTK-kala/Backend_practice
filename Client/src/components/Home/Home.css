@@ -1,7 +1,7 @@
 body {
   background: linear-gradient(135deg, #cfd9df, #e2ebf0);
   background-size: 400% 400%;
-  animation: gradientShift 10s ease infinite;
+  /* animation: gradientShift 10s ease infinite; */
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -16,7 +16,7 @@ body {
   width: 420px;
   border-radius: 24px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-  animation: fadeUp 0.6s ease;
+  /* animation: fadeUp 0.6s ease; */
 }
 
 h1 {
@@ -56,7 +56,7 @@ p {
   background: #5b21b6;
 }
 
-@keyframes fadeUp {
+/* @keyframes fadeUp {
   from {
     opacity: 0;
     transform: translateY(20px);
@@ -77,4 +77,4 @@ p {
   100% {
     background-position: 0% 50%;
   }
-}
+} */

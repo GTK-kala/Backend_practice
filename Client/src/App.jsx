@@ -10,7 +10,7 @@ const App = () => {
   const location = useLocation();
   return (
     <>
-      <AnimatePresence exitBeforeEnter>
+      <AnimatePresence mode="wait">
         <Routes location={location} key={location.key}>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />

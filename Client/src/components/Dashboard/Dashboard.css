@@ -3,7 +3,7 @@
   display: flex;
   background: linear-gradient(135deg, #cfd9df, #e2ebf0);
   background-size: 400% 400%;
-  animation: gradientShift 10s ease infinite;
+  /* animation: gradientShift 10s ease infinite; */
   font-family: "Poppins", sans-serif;
 }
 
@@ -73,7 +73,7 @@
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
   max-width: 600px;
   text-align: center;
-  animation: fadeUp 0.5s ease;
+  /* animation: fadeUp 0.5s ease; */
 }
 
 .welcome-box h1 {
@@ -88,7 +88,7 @@
   font-size: 16px;
 }
 
-@keyframes gradientShift {
+/* @keyframes gradientShift {
   0% {
     background-position: 0% 50%;
   }
@@ -109,4 +109,4 @@
     opacity: 1;
     transform: translateY(0);
   }
-}
+} */
