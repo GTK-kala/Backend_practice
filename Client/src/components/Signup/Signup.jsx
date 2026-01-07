@@ -1,6 +1,7 @@
 import "./Signup.css";
-import { useState } from "react";
+import { useState, useEffect, use } from "react";
 import toast from "react-hot-toast";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
@@ -45,7 +46,13 @@ const Signup = () => {
   };
 
   return (
-    <div className="container_signup">
+    <motion.div
+      className="container_signup"
+      initial={{ opacity: 0, x: "-100vw" }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ x: "100vw", transition: { ease: "easeInOut" } }}
+      transition={{ type: "spring", stiffness: 120, delay: 1, duration: 1.5 }}
+    >
       <h2>Create Account</h2>
 
       <form onSubmit={(e) => HandleSubmit(e)}>
@@ -85,14 +92,20 @@ const Signup = () => {
           />
         </div>
 
-        <button type="submit">Sign Up</button>
+        <motion.button
+          type="submit"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          Sign Up
+        </motion.button>
       </form>
 
       <p className="footer-text">
         Already have an account?
         <Link to="/login">Login</Link>
       </p>
-    </div>
+    </motion.div>
   );
 };
 

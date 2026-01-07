@@ -44,10 +44,10 @@ const Login = () => {
   return (
     <motion.div
       className="container_login"
-      initial={{ opacity: 0, y: -80 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.7, type: "tween" }}
+      initial={{ opacity: 0, x: "-100vw" }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ x: "100vw", transition: { ease: "easeInOut" } }}
+      transition={{ type: "spring", stiffness: 120, delay: 1, duration: 1.5 }}
     >
       <h2>Login</h2>
 
