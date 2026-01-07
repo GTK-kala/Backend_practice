@@ -1,5 +1,6 @@
 import "./login.css";
 import { useState } from "react";
+import { motion } from "framer-motion";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -41,7 +42,13 @@ const Login = () => {
     setPassword("");
   };
   return (
-    <div className="container_login">
+    <motion.div
+      className="container_login"
+      initial={{ opacity: 0, y: -80 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.7, type: "tween" }}
+    >
       <h2>Login</h2>
 
       <form onSubmit={(e) => HandleSubmit(e)}>
@@ -69,14 +76,20 @@ const Login = () => {
           />
         </div>
 
-        <button type="submit">Login</button>
+        <motion.button
+          type="submit"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          Login
+        </motion.button>
       </form>
 
       <p className="footer-text">
         Don't have an account?
         <Link to="/signup">Sign Up</Link>
       </p>
-    </div>
+    </motion.div>
   );
 };
 
