@@ -20,17 +20,12 @@ const ContextProvide = (props) => {
   };
   useEffect(() => {
     const FetchData = async () => {
-      const token = localStorage.getItem("auth_token");
-
       try {
         const url = "http://localhost:3001/auth/verify";
 
         const response = await fetch(url, {
           method: "GET",
-          headers: {
-            Authorization: `${token}`,
-          },
-          // credentials: "include",
+          credentials: "include",
         });
 
         if (!response.ok) {

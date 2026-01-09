@@ -32,7 +32,7 @@ export const LoginUser = (req, res) => {
 
     const token = jwt.sign(
       {
-        id: user.users_id,
+        id: user.id,
         role: user.role,
         email: user.email,
       },
@@ -51,11 +51,9 @@ export const LoginUser = (req, res) => {
       .cookie("token", token, cookie)
       .json({
         message: "Login successful",
-        token: token,
         user: {
-          id: user.users_id,
+          id: user.id,
           name: user.name,
-          role: user.role,
         },
       });
   });

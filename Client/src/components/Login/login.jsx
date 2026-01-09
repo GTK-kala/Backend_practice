@@ -21,7 +21,7 @@ const Login = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(values),
-        // credentials: "include",
+        credentials: "include",
       });
 
       const data = await res.json();
@@ -78,7 +78,7 @@ const Login = () => {
 
         <motion.button
           type="submit"
-          whileHover={{ scale: 1.05 }}
+          whileHover={{ scale: 1.07 }}
           whileTap={{ scale: 0.95 }}
         >
           Login

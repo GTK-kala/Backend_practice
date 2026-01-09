@@ -1,4 +1,5 @@
 import "./Home.css";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -70,14 +71,14 @@ const Home = () => {
         <div className="welcome-logged-out">
           <h1>Welcome</h1>
           <p>Select an option to continue.</p>
-          <div className="btn-group">
+          <motion.div className="btn-group">
             <Link to="/login" className="btn">
               Login
             </Link>
             <Link to="/signup" className="btn">
               Sign Up
             </Link>
-          </div>
+          </motion.div>
         </div>
       )}
     </div>
