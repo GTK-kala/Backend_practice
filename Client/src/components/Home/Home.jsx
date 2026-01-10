@@ -10,9 +10,9 @@ const Home = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    const token = localStorage.getItem("auth_token");
+    const id = localStorage.getItem("users_id");
 
-    if (!token) {
+    if (!id) {
       setIsLoggedIn(false);
       return;
     }
@@ -21,10 +21,7 @@ const Home = () => {
       try {
         const res = await fetch("http://localhost:3001/auth/verify", {
           method: "GET",
-          headers: {
-            authorization: `${token}`,
-          },
-          // credentials: "include",
+          credentials: "include",
         });
 
         if (!res.ok) {

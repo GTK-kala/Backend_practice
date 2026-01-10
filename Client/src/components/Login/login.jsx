@@ -30,7 +30,6 @@ const Login = () => {
         toast.error(data.message);
         return;
       } else {
-        localStorage.setItem("auth_token", data.token);
         localStorage.setItem("users_id", data.user.id);
         toast.success("Login successful!");
         navigate(`/`);
