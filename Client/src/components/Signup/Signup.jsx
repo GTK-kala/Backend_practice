@@ -33,7 +33,7 @@ const Signup = () => {
         return;
       } else {
         toast.success("Signup successful!");
-        navigate(`/dashboard`);
+        navigate(`/login`);
       }
     } catch (error) {
       toast.error("Signup failed. Please try again.");
