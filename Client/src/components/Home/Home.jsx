@@ -42,7 +42,6 @@ const Home = () => {
   }, []);
 
   const logout = async () => {
-    localStorage.removeItem("auth_token");
     localStorage.removeItem("users_id");
     setIsLoggedIn(false);
     navigator("/login");

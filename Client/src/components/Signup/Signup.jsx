@@ -32,7 +32,6 @@ const Signup = () => {
         toast.error(data.message);
         return;
       } else {
-        localStorage.setItem("users_id", Data.insertId);
         toast.success("Signup successful!");
         navigate(`/dashboard`);
       }
