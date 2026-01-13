@@ -13,36 +13,34 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="dashboard-container">
-      {/* Sidebar */}
-      <aside className="sidebar">
-        <h2 className="sidebar-title">Dashboard</h2>
+    <div className="dashboard-page">
+      {/* Top Navbar */}
+      <header className="top_bar">
+        <h2 className="logo" onClick={() => navigate("/")}>
+          Dashboard
+        </h2>
 
-        <nav className="nav-menu">
-          <div className="nav-item active" onClick={() => navigate("/")}>
-            Home
-          </div>
-          <div className="nav-item">Profile</div>
-          <div className="nav-item">Settings</div>
-          <div className="nav-item">Messages</div>
+        <nav className="top-nav">
+          <span onClick={() => navigate("/")}>Home</span>
+          <span>Profile</span>
+          <span>Settings</span>
+          <button className="logout-btn" onClick={handleLogout}>
+            Logout
+          </button>
         </nav>
+      </header>
 
-        <button className="logout-btn" onClick={handleLogout}>
-          Logout
-        </button>
-      </aside>
-
-      {/* Main content */}
-      <main className="main-content">
-        <div className="welcome-box">
+      {/* Main Content */}
+      <main className="dashboard-content">
+        <div className="welcome-card">
           <h1>Welcome back, {name}</h1>
           <h3 className="role-text">Role: {role}</h3>
           <p>
-            This is your dashboard. Use the navigation panel on the left to
-            manage your account and explore available features.
+            This is your dashboard. All important information and actions are
+            available here.
           </p>
 
-          <div className="quick-actions">
+          <div className="action-row">
             <button className="action-btn primary">View Profile</button>
             <button className="action-btn outline">Edit Settings</button>
           </div>
