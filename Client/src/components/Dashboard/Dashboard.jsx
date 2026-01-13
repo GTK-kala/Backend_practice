@@ -7,37 +7,47 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const { name, role } = useContext(ContextApi);
 
-  const HandleLogOut = async () => {
+  const handleLogout = () => {
     localStorage.removeItem("users_id");
-    localStorage.removeItem("auth_token");
     navigate("/login");
   };
 
   return (
     <div className="dashboard-container">
-      <div className="sidebar">
-        <h2>Dashboard</h2>
-        <div className="nav-item" onClick={() => navigate("/")}>
-          Home
-        </div>
-        <div className="nav-item">Profile</div>
-        <div className="nav-item">Settings</div>
-        <div className="nav-item">Messages</div>
-        <button className="logout-btn" onClick={(e) => HandleLogOut(e)}>
+      {/* Sidebar */}
+      <aside className="sidebar">
+        <h2 className="sidebar-title">Dashboard</h2>
+
+        <nav className="nav-menu">
+          <div className="nav-item active" onClick={() => navigate("/")}>
+            Home
+          </div>
+          <div className="nav-item">Profile</div>
+          <div className="nav-item">Settings</div>
+          <div className="nav-item">Messages</div>
+        </nav>
+
+        <button className="logout-btn" onClick={handleLogout}>
           Logout
         </button>
-      </div>
+      </aside>
 
-      <div className="main-content">
+      {/* Main content */}
+      <main className="main-content">
         <div className="welcome-box">
-          <h1>Welcome Back, {name}!</h1>
-          <h3>Your role is {role}</h3>
+          <h1>Welcome back, {name}</h1>
+          <h3 className="role-text">Role: {role}</h3>
           <p>
-            You are successfully logged in. Explore your dashboard using the
-            menu on the left.
+            This is your dashboard. Use the navigation panel on the left to
+            manage your account and explore available features.
           </p>
+
+          <div className="quick-actions">
+            <button className="action-btn primary">View Profile</button>
+            <button className="action-btn outline">Edit Settings</button>
+          </div>
         </div>
-      </div>
+      </main>
     </div>
   );
 };

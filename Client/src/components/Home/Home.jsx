@@ -1,23 +1,23 @@
 import "./Home.css";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const Home = () => {
-  const navigator = useNavigate();
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const id = localStorage.getItem("users_id");
-
-    if (!id) {
-      setIsLoggedIn(false);
-      return;
-    }
-
     const verifyUser = async () => {
+      const id = localStorage.getItem("users_id");
+
+      if (!id) {
+        setLoading(false);
+        return;
+      }
+
       try {
         const res = await fetch("http://localhost:3001/auth/verify", {
           method: "GET",
@@ -25,7 +25,7 @@ const Home = () => {
         });
 
         if (!res.ok) {
-          setIsLoggedIn(false);
+          setLoading(false);
           return;
         }
 
@@ -33,49 +33,68 @@ const Home = () => {
         setIsLoggedIn(true);
         setName(data.user.name);
       } catch (error) {
-        console.error("Error verifying user:", error);
-        setIsLoggedIn(false);
+        console.error("Verification failed:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
     verifyUser();
   }, []);
 
-  const logout = async () => {
+  const logout = () => {
     localStorage.removeItem("users_id");
     setIsLoggedIn(false);
-    navigator("/login");
+    navigate("/login");
   };
+
+  if (loading) {
+    return (
+      <div className="home-container">
+        <p className="loading-text">Checking authentication...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="home-container">
       {isLoggedIn ? (
-        <div className="welcome-logged-in">
-          <h1>Welcome Back, {name}!</h1>
-          <p>You are successfully logged in.</p>
+        <motion.div
+          className="card"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+        >
+          <h1 className="title">Welcome back</h1>
+          <h2 className="username">{name}</h2>
+          <p className="subtitle">You are successfully authenticated.</p>
 
           <div className="btn-group">
-            <Link to="/dashboard" className="btn" onClick={() => FetchData()}>
-              Go to Dashboard
+            <Link to="/dashboard" className="btn primary">
+              Dashboard
             </Link>
-            <button className="btn" onClick={() => logout()}>
+            <button className="btn danger" onClick={logout}>
               Logout
             </button>
           </div>
-        </div>
+        </motion.div>
       ) : (
-        <div className="welcome-logged-out">
-          <h1>Welcome</h1>
-          <p>Select an option to continue.</p>
-          <motion.div className="btn-group">
-            <Link to="/login" className="btn">
+        <motion.div
+          className="card"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+        >
+          <h1 className="title">Welcome</h1>
+          <p className="subtitle">Login or create an account to continue.</p>
+
+          <div className="btn-group">
+            <Link to="/login" className="btn primary">
               Login
             </Link>
-            <Link to="/signup" className="btn">
+            <Link to="/signup" className="btn outline">
               Sign Up
             </Link>
-          </motion.div>
-        </div>
+          </div>
+        </motion.div>
       )}
     </div>
   );
